@@ -1,5 +1,7 @@
 import { useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
+import { FaSearch } from "react-icons/fa";
+
 
 import css from "./SearchBar.module.css";
 export default function SearchBar({onSubmit}) {
@@ -29,15 +31,15 @@ export default function SearchBar({onSubmit}) {
                 <input
                 name="query"
                 type="text"
-                autocomplete="off"
-                autofocus
+                autoComplete="off"
+                autoFocus
                 placeholder="Search images and photos"
                 value={query}
                 onChange={handleChange}
                 className={css.input}
                 />
                 <button type="submit" className={css.searchBtn}>
-                    Search
+                <FaSearch size="22px"/>
                 </button>
             </form>
             <Toaster

@@ -9,7 +9,7 @@ import ImageModal from "../ImageModal/ImageModal.jsx";
 import {fetchImagesWithData} from "../../images-api.js";
 
 
-import css from './App.module.css';
+// import css from './App.module.css';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -18,8 +18,7 @@ function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadBtn, setLoadBtn] = useState(false);
-  const [modalWindow, setModalWindow ]= useState(null);
-
+  const [selectedImg, setSelectedImg] = useState(null);
   
   
   useEffect(() => {
@@ -31,15 +30,18 @@ function App() {
         setLoading(true);
         const { results, total_pages } = await fetchImagesWithData(query, page);
 
+        if (results.length === 0) {
+          return toast.error("There are no images matching with your search query!");
+        }
+
         setLoadBtn(total_pages > page);
         setImages((prevImages) => {
           return [...prevImages, ...results];
         });
         setLoading(false);
-      } catch {
+        } catch {
         setError(true);
-        toast.error("There are no images matching with your search query!");
-      } finally {
+        } finally {
         setLoading(false);
       }
     };
@@ -54,19 +56,15 @@ function App() {
       setPage(1);
       setImages([]);
       setError(false);
-    }
+      }
   };
 
-  // const handleLoadMore = () => {
-  //   setPage(prevPage => prevPage + 1);
-  // };
- 
-  const openModal = image => {
-    setModalWindow(image);
+   const openModal = (image) => {
+    setSelectedImg(image);
   };
 
   const closeModal = () => {
-    setModalWindow(null);
+    setSelectedImg(null);
   };
   
 
@@ -77,7 +75,10 @@ function App() {
       {loading && <Loader />}
       {images.length > 0 && <ImageGallery images={images} openModal={openModal} />}
       {loadBtn && <LoadMoreBtn onClick={() => setPage(prevPage => prevPage + 1)} />}
-      {modalWindow && <ImageModal image={modalWindow} closeModal={closeModal} />}
+      {selectedImg && <ImageModal image={selectedImg} isClose={closeModal} />}
+      <Toaster 
+      position="top-center"
+       />
     </>
   );
 }

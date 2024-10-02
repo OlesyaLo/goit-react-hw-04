@@ -1,22 +1,28 @@
 import Modal from 'react-modal';
 import css from './ImageModal.module.css';
 
-const ImageModal = ({ image, closeModal }) => {
+Modal.setAppElement(document.getElementById("root"));
+
+const ImageModal = ({ image, isClose }) => {
   if (!image) return null;
 
   return (
     <Modal
       isOpen={!!image}
-      onRequestClose={closeModal}
+      shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
+      preventScroll={true}
+      onRequestClose={isClose}
       contentLabel="image modal window"
       className={css.modal}
       overlayClassName={css.overlay}
     >
-      <button onClick={closeModal} className={css.closeButton}>Close</button>
+      
       <img src={image.urls.regular} alt={image.alt_description} className={css.image} />
-      <p>{image.description || 'No description'}</p>
-      <p>{image.user.name}</p>
-      <p>Likes: {image.likes}</p>
+      <ul className={css.imageInfo}>
+      <p>{image.description || "Image without description"}</p>
+      <li>Likes: {image.likes}</li>
+      </ul>
     </Modal>
   );
 };

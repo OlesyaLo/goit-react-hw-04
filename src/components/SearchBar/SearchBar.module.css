@@ -10,45 +10,56 @@
   
   .searchForm {
     display: flex;
-    flex-direction: row;
-    gap: 20px;
-    /* padding: 0 20px;
-    max-width: 640px; */
-    margin: 0 auto;
+    padding: 0 20px;
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
     }
   
   .input {
-    width: 400px;
+    color: #f3f7f8;
+    font-weight: 500;
+    width: 600px;
     outline: none;
     margin: 0 auto;
-    font-size: 16px;
+    font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
     padding: 12px 20px;
     border-radius: 10px;
-    background-color: #d0e8f0;
-    /* transition: border 0.2s ease; */
-    border: 1px solid #4390aa;
+    background-color: #5bbbdb;
+    transition: border 0.2s ease;
+    border: 1px solid #35788e;
   }
   
   .input:hover {
-    border: 1px solid #4b9bb6;
+    border: 1px solid #1e738f;
   }
   
   .input:focus {
-    border: 1px solid #53acca;
+    border: 1px solid #1e738f;
   }
   
+  .input::placeholder {
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: #fff;
+  }
   
+
   .searchBtn {
-    display: block;
-  width: 150px;
-  border-radius: 15px;
-  border: none;
-  background-color: beige;
-  cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    padding: 12px 0;
+      background-color: transparent;
+    color: #fff;
+    transition: color 0.5s ease, scale 0.2s ease;
+    border: none;
   }
   
   .searchBtn:hover {
-    background-color: rgb(246, 246, 178);
+    scale: 1.2;
   }
   
   .toaster {

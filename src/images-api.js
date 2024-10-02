@@ -7,7 +7,7 @@ export const fetchImagesWithData = async (query, page) => {
     params: {
       client_id: API_KEY,
       query,
-      per_page: 10,
+      per_page: 12,
       page,
     },
   });
